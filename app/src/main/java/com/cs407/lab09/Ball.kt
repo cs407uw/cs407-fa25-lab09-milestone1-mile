@@ -72,29 +72,32 @@ class Ball(
         // Left wall
         if (posX < 0f) {
             posX = 0f
-            velocityX = -velocityX * 0.8f  // 0.8 = bounciness factor
+            velocityX = 0f
+            accX = 0f
         }
 
-// Right wall
+        // Right wall
         val maxX = backgroundWidth - ballSize
         if (posX > maxX) {
             posX = maxX
-            velocityX = -velocityX * 0.8f
+            velocityX = 0f
+            accX = 0f
         }
 
-// Top wall
+        // Top wall
         if (posY < 0f) {
             posY = 0f
-            velocityY = -velocityY * 0.8f
+            velocityY = 0f
+            accY = 0f
         }
 
-// Bottom wall
+        // Bottom wall
         val maxY = backgroundHeight - ballSize
         if (posY > maxY) {
             posY = maxY
-            velocityY = -velocityY * 0.8f
+            velocityY = 0f
+            accY = 0f
         }
-
     }
 
     /**

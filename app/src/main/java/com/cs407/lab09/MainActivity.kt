@@ -68,7 +68,7 @@ fun GameScreen(viewModel: BallViewModel) {
 
     // Gravity sensor
     val gravitySensor = remember(sensorManager) {
-        sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
+        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
     }
 
     // Register/unregister sensor listener

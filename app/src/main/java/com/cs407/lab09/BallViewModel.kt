@@ -36,22 +36,20 @@ class BallViewModel : ViewModel() {
     fun onSensorDataChanged(event: SensorEvent) {
         val currentBall = ball ?: return
 
-        if (event.sensor.type == Sensor.TYPE_GRAVITY) {
+        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
             if (lastTimestamp != 0L) {
+
                 val NS2S = 1.0f / 1_000_000_000.0f
                 val dT = (event.timestamp - lastTimestamp) * NS2S
 
-// Tune this number: 2f, 3f, 5f... try what feels good
                 val speedScale = 100f
 
+                // Tilting right -> ball moves right
+                // Tilting forward/down -> ball moves down
                 val xAcc = -event.values[0] * speedScale
                 val yAcc = event.values[1] * speedScale
 
-                currentBall.updatePositionAndVelocity(
-                    xAcc = xAcc,
-                    yAcc = yAcc,
-                    dT = dT
-                )
+                currentBall.updatePositionAndVelocity(xAcc, yAcc, dT)
                 currentBall.checkBoundaries()
 
                 _ballPosition.update { Offset(currentBall.posX, currentBall.posY) }
